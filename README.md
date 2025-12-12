@@ -19,7 +19,7 @@
 conda env create -f environment.yaml
 conda activate csrldm
 ```
-You can download pre-trained models [last.ckpt](https://drive.google.com/file/d/1CJZ9CG_ssQBeww1enVoEzCyelimxPiaW/view?usp=drive_link) and put it to `./ckpt/` folder.
+You can download pre-trained models [last.ckpt](https://huggingface.co/Sonetto702/AeroGen/tree/main) and put it to `./ckpt/` folder.
 
 ### Testing
 
