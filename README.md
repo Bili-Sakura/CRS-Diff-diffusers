@@ -1,4 +1,4 @@
-# CRS-Diff: Controllable Generative Remote Sensing Foundation Model
+# CRS-Diff: Controllable Remote Sensing Image Generation with Diffusion Model
 ### [Paper (ArXiv)](https://arxiv.org/abs/2403.11614) 
 
 
