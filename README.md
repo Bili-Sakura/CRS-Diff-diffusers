@@ -77,7 +77,7 @@ python -m src.diffusers_impl.convert_checkpoint \
 ```bash
 python -m src.diffusers_impl.inference \
   --checkpoint /path/to/legacy.ckpt \
-  --prompt \"remote sensing image\" \
+  --prompt "remote sensing image" \
   --local_control /path/to/local_control.npy \
   --global_control /path/to/global_control.npy
 ```

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional, Sequence
 import sys
+from typing import List, Optional, Sequence
 
 import numpy as np
 import torch

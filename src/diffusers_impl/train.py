@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+import sys
 from typing import Any, Dict, List
 
 import torch
 import torch.nn.functional as F
 from accelerate import Accelerator
-import sys
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _EXTERNAL_DIFFUSERS_SRC = _REPO_ROOT / "external" / "diffusers" / "src"
@@ -129,7 +129,7 @@ def main() -> None:
                 optimizer.step()
                 optimizer.zero_grad(set_to_none=True)
 
-            if accelerator.is_main_process and global_step % args.save_every_steps == 0:
+            if accelerator.is_main_process and global_step > 0 and global_step % args.save_every_steps == 0:
                 save_dir = Path(args.output_dir) / f"checkpoint-{global_step}"
                 accelerator.unwrap_model(model).save_pretrained(str(save_dir), safe_serialization=True)
             global_step += 1

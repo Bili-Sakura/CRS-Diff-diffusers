@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Sequence
 import sys
+from typing import List, Sequence
 
 import torch
 
