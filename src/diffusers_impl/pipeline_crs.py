@@ -88,7 +88,7 @@ class CRSDiffusionPipeline(DiffusionPipeline):
         local_control = local_control.to(device=device, dtype=prompt_embeds.dtype)
         global_control = global_control.to(device=device, dtype=prompt_embeds.dtype)
         if local_control.shape[0] != total_batch:
-            local_control = local_control.expand(total_batch, *local_control.shape[1:]).contiguous()
+            local_control = local_control.expand(total_batch, -1, -1, -1).contiguous()
         if global_control.shape[0] != total_batch:
             global_control = global_control.expand(total_batch, -1).contiguous()
 
@@ -116,7 +116,7 @@ class CRSDiffusionPipeline(DiffusionPipeline):
             )
 
             if guidance_scale > 1.0:
-                uc_local_control, uc_global_control = self.model.zeros_like_conditions(local_control, global_control)
+                uc_local_control, uc_global_control = self.model.zero_global_control(local_control, global_control)
                 noise_pred_uncond = self.model(
                     latents=latent_model_input,
                     timesteps=t,

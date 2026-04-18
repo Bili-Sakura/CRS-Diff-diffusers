@@ -88,7 +88,7 @@ class CRSDiffusersWrapper(ModelMixin, ConfigMixin):
         )
 
     @staticmethod
-    def zeros_like_conditions(
+    def zero_global_control(
         local_control: torch.Tensor,
         global_control: torch.Tensor,
     ) -> tuple[torch.Tensor, torch.Tensor]:

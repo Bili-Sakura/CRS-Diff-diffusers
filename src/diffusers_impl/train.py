@@ -96,7 +96,7 @@ def main() -> None:
     model.train()
 
     global_step = 0
-    for _ in range(args.num_epochs):
+    for epoch in range(args.num_epochs):
         for batch in dataloader:
             with accelerator.accumulate(model):
                 latents = model.encode_images(batch["images"]).detach()
@@ -130,7 +130,7 @@ def main() -> None:
                 optimizer.zero_grad(set_to_none=True)
 
             if accelerator.is_main_process and global_step > 0 and global_step % args.save_every_steps == 0:
-                save_dir = Path(args.output_dir) / f"checkpoint-{global_step}"
+                save_dir = Path(args.output_dir) / f"checkpoint-epoch{epoch}-step{global_step}"
                 accelerator.unwrap_model(model).save_pretrained(str(save_dir), safe_serialization=True)
             global_step += 1
 
