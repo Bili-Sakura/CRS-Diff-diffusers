@@ -46,6 +46,51 @@ Some of the results are shown below：
 This repo is built upon [ControlNet](https://github.com/lllyasviel/ControlNet/tree/main) and [Uni-ControlNet](https://github.com/ShihaoZhaoZSH/Uni-ControlNet/tree/main). 
 Some of the functional implementations of remote sensing imagery refer to: [GeoSeg](https://github.com/WangLibo1995/GeoSeg),[Txt2Img-MHN](https://github.com/YonghaoXu/Txt2Img-MHN?tab=readme-ov-file#gen) and [SGCN](https://github.com/tist0bsc/SGCN). Sincere thanks to their excellent work!
 
+## Diffusers-first workflow
+
+This repository now includes a diffusers-style implementation in `src/diffusers_impl`:
+
+- `src/diffusers_impl/pipeline_crs.py`: native `DiffusionPipeline` inference entrypoint
+- `src/diffusers_impl/train.py`: native diffusers/accelerate training loop
+- `src/diffusers_impl/convert_checkpoint.py`: legacy checkpoint → diffusers `save_pretrained` converter
+- `src/diffusers_impl/inference.py`: CLI inference script for the new pipeline
+
+### Optional in-repo external diffusers clone
+
+If you want to use a local clone of huggingface/diffusers as the external library, clone it under:
+
+`external/diffusers`
+
+The new implementation auto-detects `external/diffusers/src` and prioritizes it.
+
+### Convert legacy checkpoints
+
+```bash
+python -m src.diffusers_impl.convert_checkpoint \
+  --config ./configs/crs.yaml \
+  --checkpoint /path/to/legacy.ckpt \
+  --output_dir ./converted_crs_diffusers
+```
+
+### Diffusers-style inference
+
+```bash
+python -m src.diffusers_impl.inference \
+  --checkpoint /path/to/legacy.ckpt \
+  --prompt \"remote sensing image\" \
+  --local_control /path/to/local_control.npy \
+  --global_control /path/to/global_control.npy
+```
+
+### Diffusers-style training
+
+```bash
+python -m src.diffusers_impl.train \
+  --checkpoint /path/to/legacy.ckpt \
+  --train_data /path/to/train_data.pt \
+  --output_dir ./outputs_diffusers_train
+```
+
 ## Citation
 ```
 @article{tang2024crs,

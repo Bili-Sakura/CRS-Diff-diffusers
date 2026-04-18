@@ -13,6 +13,8 @@ dependencies:
       - albumentations==0.4.3
       - basicsr==1.4.2
       - einops==0.7.0
+      - accelerate==1.1.1
+      - diffusers==0.31.0
       - gradio==4.22.0
       - numpy==1.24.3
       - omegaconf==2.1.1
